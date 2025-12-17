@@ -4,44 +4,30 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.adaptiveresponsive.nav.EntryPoint
 import com.example.adaptiveresponsive.ui.theme.AdaptiveResponsiveTheme
+import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
+import kotlin.getValue
 
 class MainActivity : ComponentActivity() {
+    val registerViewModel: RegisterViewModel by viewModels<RegisterViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AdaptiveResponsiveTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    val navigationController = rememberNavController()
+                    // Crida a la vista EntryPoint i passa el controlador de navegació
+                    EntryPoint(navigationController, registerViewModel)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AdaptiveResponsiveTheme {
-        Greeting("Android")
     }
 }

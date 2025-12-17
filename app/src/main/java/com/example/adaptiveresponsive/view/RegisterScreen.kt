@@ -26,7 +26,7 @@ import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
 
 @Composable
 fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
-    val signUp by viewModel.signUp.observeAsState(SignUp("","","","","","", false))
+    val signUp by viewModel.signUp.observeAsState(SignUp("","","","","","","", false))
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -38,7 +38,7 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
         ) {
             OutlinedTextField(
                 value = signUp.name,
-                onValueChange = { signUp.name = it },
+                onValueChange = { viewModel.chanegName(it) },
                 label = { Text("Nom complet") },
                 singleLine = true,
             )

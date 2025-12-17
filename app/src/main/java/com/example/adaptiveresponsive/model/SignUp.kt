@@ -4,6 +4,7 @@ data class SignUp(
     var name: String,
     var email: String,
     var phone: String,
+    var birthday: String,
     var username: String,
     var password: String,
     var confirmPassword: String,

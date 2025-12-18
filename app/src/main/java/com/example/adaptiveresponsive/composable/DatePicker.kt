@@ -28,6 +28,7 @@ import java.util.TimeZone
 
 //https://programmingheadache.com/2023/11/09/custom-material3-jetpack-compose-date-picker/
 //https://developer.android.com/develop/ui/compose/components/datepickers
+//D'aquestes dos pàgines és d'on he tret el codi per seleccioar les dates
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DatePickerTextField(

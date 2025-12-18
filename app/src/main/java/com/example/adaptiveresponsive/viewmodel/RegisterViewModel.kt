@@ -12,8 +12,35 @@ class RegisterViewModel : ViewModel() {
             "",false))
     val signUp: LiveData<SignUp> = _signUp
 
-    fun chanegName(name: String)
+    fun onNameChange(name: String)
     {
-        _signUp.value!!.name = name;
+        _signUp.value = _signUp.value?.copy(name = name)
+    }
+
+    fun onEmailChange(email: String) {
+        _signUp.value = _signUp.value?.copy(email = email)
+    }
+
+    fun onBirthdayChange(birthday: String) {
+        _signUp.value = _signUp.value?.copy(birthday = birthday)
+    }
+    fun onPhoneChange(phone: String) {
+        _signUp.value = _signUp.value?.copy(phone = phone)
+    }
+
+    fun onUsernameChange(username: String) {
+        _signUp.value = _signUp.value?.copy(username = username)
+    }
+
+    fun onPasswordChange(password: String) {
+        _signUp.value = _signUp.value?.copy(password = password)
+    }
+
+    fun onConfirmPasswordChange(confirm: String) {
+        _signUp.value = _signUp.value?.copy(confirmPassword = confirm)
+    }
+
+    fun onTermsChange(accepted: Boolean) {
+        _signUp.value = _signUp.value?.copy(acceptedTerms = accepted)
     }
 }

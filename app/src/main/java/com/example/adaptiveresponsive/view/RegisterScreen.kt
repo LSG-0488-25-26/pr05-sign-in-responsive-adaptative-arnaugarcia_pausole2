@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.adaptiveresponsive.composable.DatePickerTextField
 import com.example.adaptiveresponsive.model.SignUp
 import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
 
@@ -38,14 +39,14 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
         ) {
             OutlinedTextField(
                 value = signUp.name,
-                onValueChange = { viewModel.chanegName(it) },
+                onValueChange = { viewModel.onNameChange(it) },
                 label = { Text("Nom complet") },
                 singleLine = true,
             )
 
             OutlinedTextField(
                 value = signUp.email,
-                onValueChange = { signUp.email = it },
+                onValueChange = { viewModel.onEmailChange(it) },
                 label = { Text("Email") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -53,9 +54,17 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
                 )
             )
 
+            DatePickerTextField(
+                value = signUp.birthday,
+                onDateSelected = { newDate ->
+                    viewModel.onBirthdayChange(newDate)
+                },
+                label = "Data de naixement"
+            )
+
             OutlinedTextField(
                 value = signUp.phone,
-                onValueChange = { signUp.phone = it },
+                onValueChange = { viewModel.onPhoneChange(it) },
                 label = { Text("Número de teléfon") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -65,14 +74,14 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
 
             OutlinedTextField(
                 value = signUp.username,
-                onValueChange = { signUp.username = it },
+                onValueChange = { viewModel.onUsernameChange(it) },
                 label = { Text("Nom d'usuari") },
                 singleLine = true
             )
 
             OutlinedTextField(
                 value = signUp.password,
-                onValueChange = { signUp.password = it },
+                onValueChange = { viewModel.onPasswordChange(it) },
                 label = { Text("Contrasenya") },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
@@ -83,20 +92,19 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
 
             OutlinedTextField(
                 value = signUp.confirmPassword,
-                onValueChange = { signUp.confirmPassword = it },
+                onValueChange = { viewModel.onConfirmPasswordChange(it) },
                 label = { Text("Repeteix contrasenya") },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password
-                ),
-                isError = signUp.password != signUp.confirmPassword
+                )
             )
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Checkbox(
                     checked = signUp.acceptedTerms,
-                    onCheckedChange = { signUp.acceptedTerms = it }
+                    onCheckedChange = { viewModel.onTermsChange(it) }
                 )
                 Text("Accepto els termes i condicions")
             }

@@ -23,7 +23,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.adaptiveresponsive.composable.DatePickerTextField
+import com.example.adaptiveresponsive.composable.datePickerTextField
+import com.example.adaptiveresponsive.composable.header
 import com.example.adaptiveresponsive.model.SignUp
 import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
 
@@ -39,6 +40,8 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            header()
+
             OutlinedTextField(
                 value = signUp.name,
                 onValueChange = { viewModel.onNameChange(it) },
@@ -57,7 +60,7 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
             )
 
             var context = LocalContext.current;
-            DatePickerTextField(
+            datePickerTextField(
                 value = signUp.birthday,
                 onDateSelected = { newDate ->
                     viewModel.onBirthdayChange(newDate)

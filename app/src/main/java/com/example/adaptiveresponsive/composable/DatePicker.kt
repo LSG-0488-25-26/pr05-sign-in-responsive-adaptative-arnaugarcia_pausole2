@@ -31,7 +31,7 @@ import java.util.TimeZone
 //D'aquestes dos pàgines és d'on he tret el codi per seleccioar les dates
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DatePickerTextField(
+fun datePickerTextField(
     value: String,
     onDateSelected: (String) -> Unit,
     label: String

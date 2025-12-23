@@ -16,6 +16,22 @@ class RegisterViewModel : ViewModel() {
             "",false))
     val signUp: LiveData<SignUp> = _signUp
 
+    private val _loginEmail = MutableLiveData<String>()
+    val loginEmail: LiveData<String> = _loginEmail
+
+    private val _loginPassword = MutableLiveData<String>()
+    val loginPassword: LiveData<String> = _loginPassword
+
+    fun onLoginEmailChange(name: String)
+    {
+        _loginEmail.value = name
+    }
+
+    fun onLoginPasswordChange(pass: String)
+    {
+        _loginEmail.value = pass
+    }
+
     fun onNameChange(name: String)
     {
         _signUp.value = _signUp.value?.copy(name = name)

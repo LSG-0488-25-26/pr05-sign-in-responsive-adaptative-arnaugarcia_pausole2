@@ -1,5 +1,6 @@
 package com.example.adaptiveresponsive.view
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -67,7 +68,10 @@ fun LoginScreen(navController: NavController, viewModel: RegisterViewModel)
                 )
             )
 
-            Button(onClick = { }) {
+            val context = LocalContext.current
+            Button(onClick = { Toast.makeText(context,
+                viewModel.checkLogin(navController), Toast.LENGTH_SHORT).show()},
+                enabled = password.isNotEmpty() && email.isNotEmpty()) {
                 Text("Iniciar sessió")
             }
 

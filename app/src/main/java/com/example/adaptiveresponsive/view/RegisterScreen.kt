@@ -59,7 +59,6 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
                 )
             )
 
-            var context = LocalContext.current;
             datePickerTextField(
                 value = signUp.birthday,
                 onDateSelected = { newDate ->
@@ -115,9 +114,10 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
                 Text("Accepto els termes i condicions")
             }
 
+            val context = LocalContext.current;
             Button(
                 onClick = { Toast.makeText(context,
-                    viewModel.validateRegister(), Toast.LENGTH_SHORT).show() },
+                    viewModel.validateRegister(navController), Toast.LENGTH_SHORT).show() },
                 enabled = signUp.acceptedTerms
             ) {
                 Text("Registra't!")

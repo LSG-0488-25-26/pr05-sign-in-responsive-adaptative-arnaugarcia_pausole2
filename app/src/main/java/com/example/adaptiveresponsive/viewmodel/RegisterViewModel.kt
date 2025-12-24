@@ -6,7 +6,9 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import com.example.adaptiveresponsive.model.SignUp
+import com.example.adaptiveresponsive.nav.Routes
 import java.util.Calendar
 
 class RegisterViewModel : ViewModel() {
@@ -29,7 +31,7 @@ class RegisterViewModel : ViewModel() {
 
     fun onLoginPasswordChange(pass: String)
     {
-        _loginEmail.value = pass
+        _loginPassword.value = pass
     }
 
     fun onNameChange(name: String)
@@ -64,7 +66,7 @@ class RegisterViewModel : ViewModel() {
         _signUp.value = _signUp.value?.copy(acceptedTerms = accepted)
     }
 
-    fun validateRegister(): String
+    fun validateRegister(navController: NavController): String
     {
         if (!validateName())
             return "Nom invàlid"
@@ -93,6 +95,7 @@ class RegisterViewModel : ViewModel() {
         if (!_signUp.value.acceptedTerms)
             return "Termes no acceptats"
 
+        navController.navigate(Routes.LoginScreen.route)
         return "Usuari completat correctament!"
 
     }
@@ -175,5 +178,23 @@ class RegisterViewModel : ViewModel() {
         return cleanString(_signUp.value.confirmPassword) == cleanString(_signUp.value.password)
     }
 
+
+    fun checkLogin(navController: NavController): String
+    {
+
+
+        if (_signUp.value.email != _loginEmail.value)
+        {
+            return "Email no es correcte"
+        }
+
+        if (_signUp.value.password != _loginPassword.value)
+        {
+            return "Contrasenya no es correcte"
+        }
+
+        navController.navigate(Routes.WelcomeScreen.route)
+        return ""
+    }
 
 }

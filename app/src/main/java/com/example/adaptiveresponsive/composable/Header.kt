@@ -3,6 +3,7 @@ package com.example.adaptiveresponsive.composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,19 +27,20 @@ fun header()
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.Top,
         modifier = Modifier.fillMaxWidth()
-            .background(color = Color.Blue)
+            .background(color = Color(0xFF7b18d8))
             .padding(10.dp)
     ) {
         Row (
-            horizontalArrangement = Arrangement.SpaceAround,
+            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth(0.7f)
+            modifier = Modifier.fillMaxWidth()
         ) {
             Icon(
                 Icons.Default.SportsGymnastics,
                 "Gym",
                 modifier = Modifier.width(40.dp).height(40.dp)
             )
+            Spacer(Modifier.width(20.dp))
             Text("GYM BROS", fontSize = 30.sp)
         }
     }

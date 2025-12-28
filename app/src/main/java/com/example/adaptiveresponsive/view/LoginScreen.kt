@@ -42,11 +42,14 @@ fun LoginScreen(navController: NavController, viewModel: RegisterViewModel) {
             .padding(0.dp, 20.dp, 0.dp, 0.dp)
             .background(Color.Black)
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Image(
+            painter = painterResource(id = R.drawable.background),
+            contentDescription = "Background",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+            alpha = 0.6f,
+            alignment = Alignment.Center,
+        )
 
         ) {
             header()

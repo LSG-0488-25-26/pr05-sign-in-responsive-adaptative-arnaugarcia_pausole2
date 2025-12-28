@@ -49,87 +49,147 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
             alignment = Alignment.Center,
         )
 
-            OutlinedTextField(
-                value = signUp.name,
-                onValueChange = { viewModel.onNameChange(it) },
-                label = { Text("Nom complet") },
-                singleLine = true,
-            )
+        header()
 
-            OutlinedTextField(
-                value = signUp.email,
-                onValueChange = { viewModel.onEmailChange(it) },
-                label = { Text("Email") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email
-                )
-            )
-
-            datePickerTextField(
-                value = signUp.birthday,
-                onDateSelected = { newDate ->
-                    viewModel.onBirthdayChange(newDate)
-                },
-                label = "Data de naixement"
-            )
-
-            OutlinedTextField(
-                value = signUp.phone,
-                onValueChange = { viewModel.onPhoneChange(it) },
-                label = { Text("Número de teléfon") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Phone
-                )
-            )
-
-            OutlinedTextField(
-                value = signUp.username,
-                onValueChange = { viewModel.onUsernameChange(it) },
-                label = { Text("Nom d'usuari") },
-                singleLine = true
-            )
-
-            OutlinedTextField(
-                value = signUp.password,
-                onValueChange = { viewModel.onPasswordChange(it) },
-                label = { Text("Contrasenya") },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password
-                )
-            )
-
-            OutlinedTextField(
-                value = signUp.confirmPassword,
-                onValueChange = { viewModel.onConfirmPasswordChange(it) },
-                label = { Text("Repeteix contrasenya") },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password
-                )
-            )
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(
-                    checked = signUp.acceptedTerms,
-                    onCheckedChange = { viewModel.onTermsChange(it) }
-                )
-                Text("Accepto els termes i condicions")
-            }
-
-            val context = LocalContext.current;
-            Button(
-                onClick = { Toast.makeText(context,
-                    viewModel.validateRegister(navController), Toast.LENGTH_SHORT).show() },
-                enabled = signUp.acceptedTerms
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp,100.dp, 16.dp, 16.dp)
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
             ) {
-                Text("Registra't!")
+                OutlinedTextField(
+                    value = signUp.name,
+                    onValueChange = { viewModel.onNameChange(it) },
+                    label = { Text("Nom complet") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        unfocusedLabelColor = Color.Black
+                    )
+                )
+
+                OutlinedTextField(
+                    value = signUp.email,
+                    onValueChange = { viewModel.onEmailChange(it) },
+                    label = { Text("Email") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        unfocusedLabelColor = Color.Black
+                    )
+                )
+
+                datePickerTextField(
+                    value = signUp.birthday,
+                    onDateSelected = { newDate -> viewModel.onBirthdayChange(newDate) },
+                    label = "Data de naixement",
+                )
+
+                OutlinedTextField(
+                    value = signUp.phone,
+                    onValueChange = { viewModel.onPhoneChange(it) },
+                    label = { Text("Número de teléfon") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Phone
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        unfocusedLabelColor = Color.Black
+                    )
+                )
+
+                OutlinedTextField(
+                    value = signUp.username,
+                    onValueChange = { viewModel.onUsernameChange(it) },
+                    label = { Text("Nom d'usuari") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        unfocusedLabelColor = Color.Black
+                    )
+                )
+
+                OutlinedTextField(
+                    value = signUp.password,
+                    onValueChange = { viewModel.onPasswordChange(it) },
+                    label = { Text("Contrasenya") },
+                    singleLine = true,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        unfocusedLabelColor = Color.Black
+                    )
+                )
+
+                OutlinedTextField(
+                    value = signUp.confirmPassword,
+                    onValueChange = { viewModel.onConfirmPasswordChange(it) },
+                    label = { Text("Repeteix contrasenya") },
+                    singleLine = true,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        unfocusedLabelColor = Color.Black
+                    )
+                )
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Checkbox(
+                        checked = signUp.acceptedTerms,
+                        onCheckedChange = { viewModel.onTermsChange(it) }
+                    )
+                    Text("Accepto els termes i condicions", color = Color.White)
+                }
+
+                val context = LocalContext.current
+                Button (
+                    onClick = {
+                        Toast.makeText(context, viewModel.validateRegister(navController), Toast.LENGTH_SHORT).show()
+                    },
+                    enabled = signUp.acceptedTerms,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text("Registra't!", color = Color.White)
+                }
             }
         }
     }
 }
-

@@ -51,49 +51,88 @@ fun LoginScreen(navController: NavController, viewModel: RegisterViewModel) {
             alignment = Alignment.Center,
         )
 
+        header()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp,80.dp, 16.dp, 16.dp)
         ) {
-            header()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
 
-            Text("INICIAR SESSIÓ")
-            OutlinedTextField(
-                value = email,
-                onValueChange = { viewModel.onLoginEmailChange(it) },
-                label = { Text("Email") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email
-                )
-            )
-
-
-            OutlinedTextField(
-                value = password,
-                onValueChange = { viewModel.onLoginPasswordChange(it) },
-                label = { Text("Contrasenya") },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password
-                )
-            )
-
-            val context = LocalContext.current
-            Button(onClick = { Toast.makeText(context,
-                viewModel.checkLogin(navController), Toast.LENGTH_SHORT).show()},
-                enabled = password.isNotEmpty() && email.isNotEmpty()) {
-                Text("Iniciar sessió")
-            }
-
-            Button(onClick = { navController.navigate(Routes.RegisterScreen.route) }) {
-                Text("Registrat")
-            }
-
-            Column (verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(16.dp)
-                    .fillMaxSize()
-            )
-            {  }
+            ) {
+                Text(
+                    text = "INICIAR SESSIÓ",
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    color = Color.White
+                )
+
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { viewModel.onLoginEmailChange(it) },
+                    label = { Text("Email") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.Transparent,
+                        unfocusedLabelColor = Color.Transparent
+                    )
+                )
+
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { viewModel.onLoginPasswordChange(it) },
+                    label = { Text("Contrasenya") },
+                    singleLine = true,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedLabelColor = Color.Transparent,
+                        unfocusedLabelColor = Color.Transparent
+                    )
+                )
+
+                val context = LocalContext.current
+                Button(
+                    onClick = {
+                        Toast.makeText(context, viewModel.checkLogin(navController), Toast.LENGTH_SHORT).show()
+                    },
+                    enabled = password.isNotEmpty() && email.isNotEmpty(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp)
+                ) {
+                    Text("Iniciar sessió")
+                }
+
+                Button(
+                    onClick = { navController.navigate(Routes.RegisterScreen.route) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Registra't")
+                }
+            }
         }
     }
 }
+

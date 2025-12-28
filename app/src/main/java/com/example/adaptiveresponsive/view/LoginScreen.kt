@@ -1,40 +1,46 @@
 package com.example.adaptiveresponsive.view
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.adaptiveresponsive.composable.datePickerTextField
 import com.example.adaptiveresponsive.composable.header
 import com.example.adaptiveresponsive.model.SignUp
 import com.example.adaptiveresponsive.nav.Routes
 import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
+import com.example.adaptiveresponsive.R
+
 
 @Composable
-fun LoginScreen(navController: NavController, viewModel: RegisterViewModel)
-{
+fun LoginScreen(navController: NavController, viewModel: RegisterViewModel) {
     val email by viewModel.loginEmail.observeAsState("")
     val password by viewModel.loginPassword.observeAsState("")
 
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(0.dp, 20.dp, 0.dp, 0.dp)
+            .background(Color.Black)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)

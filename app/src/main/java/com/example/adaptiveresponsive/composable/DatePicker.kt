@@ -3,6 +3,7 @@ package com.example.adaptiveresponsive.composable
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
@@ -11,6 +12,7 @@ import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -21,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -38,7 +41,7 @@ fun datePickerTextField(
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
 
-    Box {
+    Box (Modifier.fillMaxSize()) {
         OutlinedTextField(
             value = value,
             onValueChange = { },
@@ -48,6 +51,13 @@ fun datePickerTextField(
                 Icon(Icons.Default.CalendarToday, contentDescription = "Escull data")
             },
             singleLine = true,
+            modifier = Modifier.fillMaxWidth(),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                focusedLabelColor = Color.White,
+                unfocusedLabelColor = Color.Black
+            )
         )
 
         Box(

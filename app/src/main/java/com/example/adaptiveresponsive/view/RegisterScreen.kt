@@ -10,6 +10,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -29,15 +31,18 @@ import com.example.adaptiveresponsive.composable.datePickerTextField
 import com.example.adaptiveresponsive.composable.header
 import com.example.adaptiveresponsive.model.SignUp
 import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 
 @Composable
-fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
+fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel, windowSize: WindowSizeClass) {
     val signUp by viewModel.signUp.observeAsState(SignUp("","","","","","","", false))
+
+    var contentModifierBox: Modifier
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(0.dp, 20.dp, 0.dp, 0.dp)
+            .safeDrawingPadding()
             .background(Color.Black)
     ) {
         Image(
@@ -49,12 +54,21 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
             alignment = Alignment.Center,
         )
 
-        header()
+        if (windowSize.heightSizeClass != WindowHeightSizeClass.Compact)
+        {
+            header()
+            contentModifierBox = Modifier
+                .fillMaxSize()
+                .padding(16.dp,80.dp, 16.dp, 16.dp)
+        } else {
+            contentModifierBox = Modifier
+                .fillMaxSize()
+                .padding(16.dp,16.dp, 16.dp, 16.dp)
+                .align(Alignment.Center)
+        }
 
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp,100.dp, 16.dp, 16.dp)
+            modifier = contentModifierBox
         ) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -63,6 +77,13 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel) {
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
             ) {
+                Text(
+                    text = "REGISTRE",
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    color = Color.White
+                )
+
                 OutlinedTextField(
                     value = signUp.name,
                     onValueChange = { viewModel.onNameChange(it) },

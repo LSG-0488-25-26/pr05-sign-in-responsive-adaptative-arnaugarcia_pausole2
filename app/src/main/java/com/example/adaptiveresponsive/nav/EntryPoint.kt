@@ -1,5 +1,6 @@
 package com.example.adaptiveresponsive.nav
 
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -12,14 +13,14 @@ import com.example.adaptiveresponsive.view.WelcomeScreen
 import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
 
 @Composable
-fun EntryPoint(navigationController: NavController, viewModel: RegisterViewModel)
+fun EntryPoint(navigationController: NavController, viewModel: RegisterViewModel, windowSizeClass: WindowSizeClass)
 {
     NavHost(
         navController = navigationController as NavHostController,
         startDestination = Routes.LoginScreen.route
     ) {
-        composable(Routes.LoginScreen.route) { LoginScreen(navigationController, viewModel) }
-        composable(Routes.RegisterScreen.route) { RegisterScreen(navigationController, viewModel) }
+        composable(Routes.LoginScreen.route) { LoginScreen(navigationController, viewModel, windowSizeClass) }
+        composable(Routes.RegisterScreen.route) { RegisterScreen(navigationController, viewModel, windowSizeClass) }
         composable(Routes.WelcomeScreen.route) { WelcomeScreen(navigationController, viewModel) }
 
     }

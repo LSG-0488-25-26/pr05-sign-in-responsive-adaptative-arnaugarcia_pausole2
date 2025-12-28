@@ -4,15 +4,17 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -28,19 +30,23 @@ import com.example.adaptiveresponsive.model.SignUp
 import com.example.adaptiveresponsive.nav.Routes
 import com.example.adaptiveresponsive.viewmodel.RegisterViewModel
 import com.example.adaptiveresponsive.R
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.ui.Alignment
 
 
 @Composable
-fun LoginScreen(navController: NavController, viewModel: RegisterViewModel) {
+fun LoginScreen(navController: NavController, viewModel: RegisterViewModel, windowSize: WindowSizeClass) {
     val email by viewModel.loginEmail.observeAsState("")
     val password by viewModel.loginPassword.observeAsState("")
+
+    var contentModifierBox: Modifier
 
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(0.dp, 20.dp, 0.dp, 0.dp)
-            .background(Color.Black)
+            .safeDrawingPadding()
+
     ) {
         Image(
             painter = painterResource(id = R.drawable.background),
@@ -51,11 +57,22 @@ fun LoginScreen(navController: NavController, viewModel: RegisterViewModel) {
             alignment = Alignment.Center,
         )
 
-        header()
-        Box(
-            modifier = Modifier
+        if (windowSize.heightSizeClass != WindowHeightSizeClass.Compact)
+        {
+            header()
+            contentModifierBox = Modifier
                 .fillMaxSize()
                 .padding(16.dp,80.dp, 16.dp, 16.dp)
+        } else {
+            contentModifierBox = Modifier
+                .fillMaxSize()
+                .padding(16.dp,16.dp, 16.dp, 16.dp)
+                .align(Alignment.Center)
+                .verticalScroll(rememberScrollState())
+        }
+
+        Box(
+            modifier = contentModifierBox
         ) {
             Column(
                 modifier = Modifier
